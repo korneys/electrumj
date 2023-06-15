@@ -16,4 +16,5 @@ public class ScriptPubKey {
     private String type;
     private List<String> addresses;
     private String desc;
+    private String address;
 }
