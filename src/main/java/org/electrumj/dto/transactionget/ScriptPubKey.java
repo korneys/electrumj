@@ -8,7 +8,7 @@ import java.util.List;
 
 @Data
 @ToString
-@JsonIgnoreProperties  
+@JsonIgnoreProperties(ignoreUnknown = true)  
 public class ScriptPubKey {
     private String asm;
     private String hex;
