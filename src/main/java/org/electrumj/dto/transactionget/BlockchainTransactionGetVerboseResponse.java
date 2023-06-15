@@ -9,7 +9,7 @@ import java.util.List;
 
 @Data
 @ToString
-@JsonIgnoreProperties    
+@JsonIgnoreProperties(ignoreUnknown = true)    
 public class BlockchainTransactionGetVerboseResponse {
     @JsonProperty("blockhash")
     private String blockHash;
