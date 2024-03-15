@@ -88,7 +88,6 @@ public class ElectrumClient {
 
     // Section connection
 
-
     /**
      * Opens the connection to the electrum server.*
      *
@@ -97,7 +96,7 @@ public class ElectrumClient {
      * @throws IOException
      */
     public void openConnection() throws GeneralSecurityException, IOException {
-        openConnection(0);
+        openConnection(0, 0);
     }
 
     /**
@@ -110,13 +109,27 @@ public class ElectrumClient {
      * @throws IOException
      */
     public void openConnection(int connectTimeout) throws GeneralSecurityException, IOException {
+        openConnection(connectTimeout, 0);
+    }
+
+    /**
+     * Opens the connection to the electrum server.*
+     *
+     * @param connectTimeout the timeout value to be used in milliseconds.
+     * @param readTimeout the timeout value to be used in milliseconds.
+     *
+     * @throws KeyManagementException
+     * @throws NoSuchAlgorithmException
+     * @throws IOException
+     */
+    public void openConnection(int connectTimeout, int readTimeout) throws GeneralSecurityException, IOException {
         assert !connectionOpened;
         SSLSocketFactory factory = createTrustAllCertsSocketFactory();
 
         socket = (SSLSocket) factory.createSocket();
         socket.setSoTimeout(connectTimeout);
         socket.connect(new InetSocketAddress(this.getServerHostnameOrIp(), this.getServerPort()), connectTimeout);
-        socket.setSoTimeout(0);
+        socket.setSoTimeout(readTimeout);
 
         socket.startHandshake();
 
